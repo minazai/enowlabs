@@ -12,12 +12,3 @@ HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
     CMD curl -sf http://localhost:1430/health || exit 1
 ENTRYPOINT ["/root/.local/bin/enowxai"]
 CMD ["__daemon"]
-
-docker build -t enowxai .
-docker run -d --name enowxai \
-  -p 1430:1430 -p 1431:1431 \
-  -v enowxai-data:/root/.enowxai \
-  -v enowxai-venv:/root/.local/lib/enowxai/auth/.venv \
-  -e ENOWXAI_PROXY_HOST=0.0.0.0 \
-  -e ENOWXAI_DASHBOARD_HOST=0.0.0.0 \
-  enowxai
